@@ -53,14 +53,14 @@ public class Menu extends JFrame {
 		
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
 		mnArchivo.add(mntmNuevo);
-		
-		JMenuItem mntmGuardar = new JMenuItem("Guardar");
-		mnArchivo.add(mntmGuardar);
-		
-		JMenuItem mntmAbrir = new JMenuItem("Abrir");
-		mnArchivo.add(mntmAbrir);
+		mntmNuevo.setEnabled(false);
 		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+			}
+		});
 		mnArchivo.add(mntmSalir);
 		
 		JMenu mnEditar = new JMenu("Editar");
@@ -81,8 +81,8 @@ public class Menu extends JFrame {
 		JMenuItem mntmEstadisticas = new JMenuItem("Estadisticas");
 		mntmEstadisticas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Estadisticas estad = new Estadisticas();
-				estad.setVisible(true);
+				Estadisticas est = new Estadisticas();
+				est.setVisible(true);
 			}
 		});
 		mnVer.add(mntmEstadisticas);

@@ -6,18 +6,31 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.awt.event.ActionEvent;
 
 public class Registro extends JFrame {
 
@@ -25,6 +38,8 @@ public class Registro extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtID;
 	private JTextField txtEdad;
+	
+	DefaultListModel<Usuarios> modelo = new DefaultListModel<Usuarios>();
 
 	/**
 	 * Launch the application.
@@ -61,9 +76,7 @@ public class Registro extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		panelUsuarios.add(scrollPane);
 		
-		JList list = new JList();
-		list.setBackground(new Color(245, 222, 179));
-		scrollPane.setViewportView(list);
+		
 		
 		JPanel panelDatos = new JPanel();
 		contentPane.add(panelDatos, BorderLayout.CENTER);
@@ -98,7 +111,7 @@ public class Registro extends JFrame {
 		panelRegistro.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		JLabel lblId = new JLabel("ID");
+		JLabel lblId = new JLabel("Nickname");
 		lblId.setForeground(new Color(255, 255, 0));
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
 		lblId.setBackground(new Color(255, 127, 80));
@@ -124,6 +137,117 @@ public class Registro extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setIcon(new ImageIcon(Registro.class.getResource("/img/connect4.png")));
 		contentPane.add(label, BorderLayout.NORTH);
+		
+		JList list = new JList();
+		list.setBackground(new Color(245, 222, 179));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				int index = list.getSelectedIndex();
+				if(index!=-1) {
+					Usuarios us = modelo.get(index);
+					txtNombre.setText(modelo.getElementAt(index).getNombre());
+					txtID.setText(modelo.getElementAt(index).getNickname());
+					txtEdad.setText(String.valueOf(modelo.getElementAt(index).getEdad()));	
+				}
+			}	
+		});
+		scrollPane.setViewportView(list);
+		
+		try {
+			FileInputStream file = new FileInputStream("personas.txt");
+			ObjectInputStream ois = new ObjectInputStream(file);
+			modelo = (DefaultListModel<Usuarios>)ois.readObject();
+			file.close();
+			ois.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		list.setModel(modelo);
+				
+		//Acciones de los botones
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(txtNombre.getText().equals("") || txtID.getText().equals("")) {
+					JOptionPane.showMessageDialog(contentPane, "Los campos con * son obligatorios ");
+				}
+				else {
+				String nombre = txtNombre.getText();
+				String nickname = txtID.getText();
+				int edad = Integer.parseInt(txtEdad.getText());
+				Usuarios us = new Usuarios(nombre,nickname,edad);
+				modelo.addElement(us);
+				
+				try {
+					FileOutputStream file = new FileOutputStream("personas.txt");
+					ObjectOutputStream oos = new ObjectOutputStream(file);
+					oos.writeObject(modelo);
+					file.close();
+					oos.close();					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			}
+		});
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int index = list.getSelectedIndex();
+				String nombre = txtNombre.getText();
+				String nickname = txtID.getText();
+				int edad = Integer.parseInt(txtEdad.getText());
+				Usuarios us = new Usuarios(nombre,nickname,edad);
+				modelo.setElementAt(us, index);
+				try {
+					FileOutputStream file = new FileOutputStream("personas.txt");
+					ObjectOutputStream oos = new ObjectOutputStream(file);
+					oos.writeObject(modelo);
+					file.close();
+					oos.close();					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int index = list.getSelectedIndex();
+				Usuarios us = modelo.get(index);
+				modelo.remove(index);
+				txtEdad.setText(null);
+				txtID.setText(null);
+				txtNombre.setText(null);
+				try {
+					FileOutputStream file = new FileOutputStream("personas.txt");
+					ObjectOutputStream oos = new ObjectOutputStream(file);
+					file.close();
+					oos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
