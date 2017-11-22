@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
+	private static Menu frame;
 
 	/**
 	 * Launch the application.
@@ -29,7 +30,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu();
+					frame = new Menu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -126,6 +127,16 @@ public class Menu extends JFrame {
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setIcon(new ImageIcon(Menu.class.getResource("/img/conecta4.png")));
 		contentPane.add(label_1, BorderLayout.NORTH);
+	
+		//Acciones de los botones
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Conecta4 jugar = new Conecta4();
+				jugar.start();
+				frame.setVisible(false);
+			}
+		});
+	
 	}
 
 }
