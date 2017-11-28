@@ -11,16 +11,20 @@ public class Conecta4 implements Runnable{
 	private Tablero tablero;
 	private Display ventana;
 	private BufferStrategy bs;
+	private Recursos recursos;
 	
 	
 	/*Esta clase no recibe parametros del main*/
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	}
+	public Conecta4() {
+		start();
+	}
 	
 	
 	public void init() {
-		ventana = new Display(490,490,"Conecta Cuatro");
+		ventana = new Display(500,500,"Conecta Cuatro");
 		ventana.getCanvas().setFocusable(true);
 		Recursos.init();
 		tablero= new Tablero(this); //se comenta porque Tablero no necesita nada de Conecta4 
@@ -50,14 +54,15 @@ public class Conecta4 implements Runnable{
 			ventana.getCanvas().createBufferStrategy(3);
 			return;
 		}
-		
+		g=bs.getDrawGraphics();
 		g.clearRect(0, 0, 490, 490);
-		tablero.render(g);
+		recursos.render(g);
 	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		init();
+		render();
 	}
 
 

@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class Registro extends JFrame {
@@ -40,7 +41,7 @@ public class Registro extends JFrame {
 	private JTextField txtEdad;
 	
 	DefaultListModel<Usuarios> modelo = new DefaultListModel<Usuarios>();
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -173,7 +174,7 @@ public class Registro extends JFrame {
 		}
 	
 		list.setModel(modelo);
-				
+		
 		//Acciones de los botones
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -184,9 +185,10 @@ public class Registro extends JFrame {
 				String nombre = txtNombre.getText();
 				String nickname = txtID.getText();
 				int edad = Integer.parseInt(txtEdad.getText());
+				int index;
 				Usuarios us = new Usuarios(nombre,nickname,edad);
 				modelo.addElement(us);
-				
+
 				try {
 					FileOutputStream file = new FileOutputStream("personas.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
@@ -248,6 +250,8 @@ public class Registro extends JFrame {
 				}
 			}
 		});
+	
 	}
-
+	
 }
+/*Implementar el metodo CopyInto(Object[] anArray para desplegarlo al inicio del juego)*/

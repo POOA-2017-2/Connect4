@@ -126,7 +126,7 @@ public class Menu extends JFrame {
 		JLabel label_1 = new JLabel("");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setIcon(new ImageIcon(Menu.class.getResource("/img/conecta4.png")));
-		contentPane.add(label_1, BorderLayout.NORTH);
+		contentPane.add(label_1, BorderLayout.NORTH);	
 	
 		//Acciones de los botones
 		btnJugar.addActionListener(new ActionListener() {
