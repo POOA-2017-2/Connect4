@@ -3,15 +3,15 @@ package conecta4;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import testing.Tablero;
+
 public class Conecta4 implements Runnable{
 
 	private boolean activo;
 	private Thread t;
 	private Graphics g;
 	private Tablero tablero;
-	private Display ventana;
 	private BufferStrategy bs;
-	private Recursos recursos;
 	
 	
 	/*Esta clase no recibe parametros del main*/
@@ -24,10 +24,12 @@ public class Conecta4 implements Runnable{
 	
 	
 	public void init() {
+		/*
 		ventana = new Display(500,500,"Conecta Cuatro");
 		ventana.getCanvas().setFocusable(true);
 		Recursos.init();
-		tablero= new Tablero(this); //se comenta porque Tablero no necesita nada de Conecta4 
+		tablero= new Tablero(this); //se comenta porque Tablero no necesita nada de Conecta4
+		*/ 
 	}
 	
 	public synchronized void start() {
@@ -49,6 +51,7 @@ public class Conecta4 implements Runnable{
 		}
 	}
 	public void render() {
+		/*
 		bs=ventana.getCanvas().getBufferStrategy();
 		if(bs==null) {
 			ventana.getCanvas().createBufferStrategy(3);
@@ -57,6 +60,7 @@ public class Conecta4 implements Runnable{
 		g=bs.getDrawGraphics();
 		g.clearRect(0, 0, 490, 490);
 		recursos.render(g);
+		*/
 	}
 	@Override
 	public void run() {

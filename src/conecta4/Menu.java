@@ -1,6 +1,7 @@
 package conecta4;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -22,6 +24,7 @@ public class Menu extends JFrame {
 
 	private JPanel contentPane;
 	private static Menu frame;
+	String[] nombres = {"Juan", "Pedro", "Mateo"};
 
 	/**
 	 * Launch the application.
@@ -108,32 +111,63 @@ public class Menu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JLabel label = new JLabel("");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setIcon(new ImageIcon(Menu.class.getResource("/img/3balls.gif")));
-		contentPane.add(label, BorderLayout.CENTER);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		contentPane.add(panel, BorderLayout.SOUTH);
+		JPanel panelBotones = new JPanel();
+		panelBotones.setBackground(Color.WHITE);
+		contentPane.add(panelBotones, BorderLayout.SOUTH);
 		
 		JButton btnJugar = new JButton("Jugar!");
 		btnJugar.setIcon(new ImageIcon(Menu.class.getResource("/com/sun/java/swing/plaf/windows/icons/HomeFolder.gif")));
 		btnJugar.setForeground(Color.RED);
 		btnJugar.setBackground(Color.YELLOW);
-		panel.add(btnJugar);
+		panelBotones.add(btnJugar);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setIcon(new ImageIcon(Menu.class.getResource("/img/conecta4.png")));
-		contentPane.add(label_1, BorderLayout.NORTH);	
+		JPanel panelMarcador = new JPanel();
+		contentPane.add(panelMarcador, BorderLayout.NORTH);
+		
+		JLabel lblMarcador = new JLabel("Marcador1");
+		panelMarcador.add(lblMarcador);
+		
+		JLabel lblNombre = new JLabel("Nombre1");
+		panelMarcador.add(lblNombre);
+		
+		JLabel lblVs = new JLabel("VS");
+		panelMarcador.add(lblVs);
+		
+		JLabel lblNombre2 = new JLabel("Nombre2");
+		panelMarcador.add(lblNombre2);
+		
+		JLabel lblMarcador2 = new JLabel("Marcador2");
+		panelMarcador.add(lblMarcador2);
+		
+		//Panel del juego donde se va mostrar el tablero, presentacion o estadisticas (apenas por implmentar)
+		JPanel panelJuego = new JPanel();
+		contentPane.add(panelJuego, BorderLayout.CENTER);
+		panelJuego.setLayout(new CardLayout(0,0));
+		
+		//Panel de la primera pantalla de bienvenida
+		Presentacion pnlPresentacion = new Presentacion();
+		panelJuego.add(pnlPresentacion, "Presentacion");
+		
+		//Panel del tablero donde se va estar jugando
+		Tablero pnlTablero = new Tablero();
+		panelJuego.add(pnlTablero, "Tablero");
 	
-		//Acciones de los botones
+		/*Acciones de los botones*/
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String jugador1 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, null, nombres, nombres[0]);
+				//if(jugador1.equals(nombres[0]))
+					//return jugador1;
+				String jugador2 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #2", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, null, nombres, nombres[0]);
+				/*comandos para empezar a jugar con el metodo anterior
 				Conecta4 jugar = new Conecta4();
 				jugar.start();
-				frame.setVisible(false);
+				frame.setVisible(false);*/
+				CardLayout c = (CardLayout) panelJuego.getLayout();
+				c.next(panelJuego);
+				c.show(panelJuego, "Tablero");
+				pnlTablero.setFocusable(true);
+				btnJugar.setEnabled(false);
 			}
 		});
 	
