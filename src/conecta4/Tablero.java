@@ -1,6 +1,7 @@
 package conecta4;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 
 import testing.Escenario;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /*Panel para dibujar el tablero donde se estara jugando.
  * CardLayout del Juego*/
@@ -24,7 +27,7 @@ public class Tablero extends JPanel {
 	private BufferedImage roja;
 	private BufferedImage amarilla;
 	private JLabel fichaAmarilla;
-	private JLabel fichaRoja;
+	//private JLabel fichaRoja;
 	
 	/*
 	 * COORDENADAS DE LOS ESPACIOS
@@ -56,15 +59,6 @@ public class Tablero extends JPanel {
 		}
 		repaint();
 		
-		//Pinta las fichas
-		/*
-		fichaAmarilla = new JLabel();
-		fichaAmarilla.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
-		fichaAmarilla.setOpaque(false);
-		fichaAmarilla.setBounds(115, 86, 60, 60);
-		add(fichaAmarilla);
-		*/
-		
 		JPanel panelBotones = new JPanel();
 		panelBotones.setBorder(new LineBorder(new Color(255, 215, 0)));
 		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
@@ -95,6 +89,42 @@ public class Tablero extends JPanel {
 		JButton btnSiete = new JButton("7");
 		panelBotones.add(btnSiete);
 		
+		JLabel lbl1 = new JLabel();
+		lbl1.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+		lbl1.setOpaque(false);
+		lbl1.setBounds(21, 37, 60, 60);
+		add(lbl1);
+		
+		JLabel lbl2 = new JLabel();
+		lbl2.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+		lbl2.setOpaque(false);
+		lbl2.setBounds(91, 37, 60, 60);
+		add(lbl2);
+		
+		JLabel lbl3 = new JLabel();
+		lbl3.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+		lbl3.setOpaque(false);
+		lbl3.setBounds(161, 37, 60, 60);
+		add(lbl3);
+		
+		//ACCIONES DE LOS BOTONES
+		/*Implementar que cuando sea el cambio de turno del jugador, las fichas de muestra cambien de color 
+		al turno correspiente*/
+		btnUno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lbl1.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_1.png")));
+				lbl2.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_1.png")));
+				lbl3.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_1.png")));
+			}
+		});
+		btnDos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lbl1.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+				lbl2.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+				lbl3.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+			}
+		});
+		
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -104,12 +134,13 @@ public class Tablero extends JPanel {
 		
 		//PINTA LAS FICHAS PRIMERO
 		//FICHAS DE MUESTRA
-		g.drawImage(roja, 21, 37, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(amarilla, 91, 37, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(roja, 161, 37, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(amarilla, 231, 37, amarilla.getWidth(), amarilla.getHeight(), null);
+		
+		//g.drawImage(roja, 21, 37, roja.getWidth(), roja.getHeight(), null);
+		//g.drawImage(amarilla, 91, 37, amarilla.getWidth(), amarilla.getHeight(), null);
+		//g.drawImage(roja, 161, 37, roja.getWidth(), roja.getHeight(), null);
+		g.drawImage(roja, 231, 37, amarilla.getWidth(), amarilla.getHeight(), null);
 		g.drawImage(roja, 301, 37, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(amarilla, 371, 37, amarilla.getWidth(), amarilla.getHeight(), null);
+		g.drawImage(roja, 371, 37, amarilla.getWidth(), amarilla.getHeight(), null);
 		g.drawImage(roja, 441, 37, roja.getWidth(), roja.getHeight(), null);
 		
 		//TABLERO DESPUES
@@ -118,5 +149,5 @@ public class Tablero extends JPanel {
 		int y=getHeight()/1 - imagen.getHeight(this)/1;
 		g.drawImage(imagen, x, y, this);
 	}
-
+	
 }
