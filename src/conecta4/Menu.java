@@ -47,7 +47,7 @@ public class Menu extends JFrame {
 	 */
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 500);
+		setBounds(100, 100, 550, 660);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -151,6 +151,10 @@ public class Menu extends JFrame {
 		//Panel del tablero donde se va estar jugando
 		Tablero pnlTablero = new Tablero();
 		panelJuego.add(pnlTablero, "Tablero");
+		
+		if(pnlPresentacion.isVisible()) {
+			panelMarcador.setVisible(false);
+		}
 	
 		/*Acciones de los botones*/
 		btnJugar.addActionListener(new ActionListener() {
@@ -168,6 +172,8 @@ public class Menu extends JFrame {
 				c.show(panelJuego, "Tablero");
 				pnlTablero.setFocusable(true);
 				btnJugar.setEnabled(false);
+				panelMarcador.setVisible(true);
+				panelBotones.setBackground(new Color(47, 79, 79));
 			}
 		});
 	

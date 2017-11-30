@@ -3,8 +3,6 @@ package conecta4;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import testing.Tablero;
-
 public class Conecta4 implements Runnable{
 
 	private boolean activo;
