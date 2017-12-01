@@ -62,8 +62,9 @@ public class Tablero extends JPanel {
 		JPanel panelBotones = new JPanel();
 		panelBotones.setBorder(new LineBorder(new Color(255, 215, 0)));
 		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
+		flowLayout.setVgap(6);
 		flowLayout.setAlignOnBaseline(true);
-		flowLayout.setHgap(28);
+		flowLayout.setHgap(26);
 		panelBotones.setBounds(0, 0, 550, 35);
 		panelBotones.setBackground(new Color(47, 79, 79));
 		add(panelBotones);
@@ -89,39 +90,71 @@ public class Tablero extends JPanel {
 		JButton btnSiete = new JButton("7");
 		panelBotones.add(btnSiete);
 		
+		//------------------------Fichas de muestra-------------------------------------
 		JLabel lbl1 = new JLabel();
-		lbl1.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+		lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl1.setOpaque(false);
-		lbl1.setBounds(21, 37, 60, 60);
+		lbl1.setBounds(21, 42, 60, 60);
 		add(lbl1);
 		
 		JLabel lbl2 = new JLabel();
-		lbl2.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+		lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl2.setOpaque(false);
-		lbl2.setBounds(91, 37, 60, 60);
+		lbl2.setBounds(91, 42, 60, 60);
 		add(lbl2);
 		
 		JLabel lbl3 = new JLabel();
-		lbl3.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+		lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl3.setOpaque(false);
-		lbl3.setBounds(161, 37, 60, 60);
+		lbl3.setBounds(161, 42, 60, 60);
 		add(lbl3);
+		/*
+		JLabel lbl4 = new JLabel();
+		lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+		lbl4.setOpaque(false);
+		lbl4.setBounds(231, 42, 60, 60);
+		add(lbl4);
+		*/
+		JLabel lbl5 = new JLabel();
+		lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+		lbl5.setOpaque(false);
+		lbl5.setBounds(301, 42, 60, 60);
+		add(lbl5);
 		
+		JLabel lbl6 = new JLabel();
+		lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+		lbl6.setOpaque(false);
+		lbl6.setBounds(371, 42, 60, 60);
+		add(lbl6);
+		
+		JLabel lbl7 = new JLabel();
+		lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+		lbl7.setOpaque(false);
+		lbl7.setBounds(441, 42, 60, 60);
+		add(lbl7);
 		//ACCIONES DE LOS BOTONES
 		/*Implementar que cuando sea el cambio de turno del jugador, las fichas de muestra cambien de color 
 		al turno correspiente*/
 		btnUno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lbl1.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_1.png")));
-				lbl2.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_1.png")));
-				lbl3.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_1.png")));
+				lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				//lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
 			}
 		});
 		btnDos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lbl1.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
-				lbl2.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
-				lbl3.setIcon(new ImageIcon(Escenario.class.getResource("/img/token_0.png")));
+				lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				//lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 			}
 		});
 		
@@ -134,15 +167,15 @@ public class Tablero extends JPanel {
 		
 		//PINTA LAS FICHAS PRIMERO
 		//FICHAS DE MUESTRA
-		
 		//g.drawImage(roja, 21, 37, roja.getWidth(), roja.getHeight(), null);
 		//g.drawImage(amarilla, 91, 37, amarilla.getWidth(), amarilla.getHeight(), null);
 		//g.drawImage(roja, 161, 37, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(roja, 231, 37, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(roja, 301, 37, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(roja, 371, 37, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(roja, 441, 37, roja.getWidth(), roja.getHeight(), null);
-		
+		g.drawImage(roja, 231, 42, amarilla.getWidth(), amarilla.getHeight(), null);
+		/*
+		g.drawImage(roja, 301, 42, roja.getWidth(), roja.getHeight(), null);
+		g.drawImage(roja, 371, 42, amarilla.getWidth(), amarilla.getHeight(), null);
+		g.drawImage(roja, 441, 42, roja.getWidth(), roja.getHeight(), null);
+		*/
 		//TABLERO DESPUES
 		Image imagen=new ImageIcon(Escenario.class.getResource("/img/4inARowBG.png")).getImage();
 		int x=getWidth()/2 - imagen.getWidth(this)/2;

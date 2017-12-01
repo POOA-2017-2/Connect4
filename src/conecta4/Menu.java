@@ -47,7 +47,12 @@ public class Menu extends JFrame {
 	 */
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 660);
+		int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+		int ancho=java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+		int x = (ancho/2) - (550/2); 
+		int y = (alto/2) - (700/2);
+		setBounds(x, y, 550, 660);
+		setResizable(false);	//Para que no se pueda agrandar la pantalla
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -122,21 +127,27 @@ public class Menu extends JFrame {
 		panelBotones.add(btnJugar);
 		
 		JPanel panelMarcador = new JPanel();
+		panelMarcador.setBackground(new Color(47, 79, 79));
 		contentPane.add(panelMarcador, BorderLayout.NORTH);
 		
 		JLabel lblMarcador = new JLabel("Marcador1");
+		lblMarcador.setForeground(Color.RED);
 		panelMarcador.add(lblMarcador);
 		
-		JLabel lblNombre = new JLabel("Nombre1");
-		panelMarcador.add(lblNombre);
+		JLabel lblNombre1 = new JLabel("Nombre1");
+		lblNombre1.setForeground(Color.RED);
+		panelMarcador.add(lblNombre1);
 		
 		JLabel lblVs = new JLabel("VS");
+		lblVs.setForeground(Color.WHITE);
 		panelMarcador.add(lblVs);
 		
 		JLabel lblNombre2 = new JLabel("Nombre2");
+		lblNombre2.setForeground(Color.YELLOW);
 		panelMarcador.add(lblNombre2);
 		
 		JLabel lblMarcador2 = new JLabel("Marcador2");
+		lblMarcador2.setForeground(Color.YELLOW);
 		panelMarcador.add(lblMarcador2);
 		
 		//Panel del juego donde se va mostrar el tablero, presentacion o estadisticas (apenas por implmentar)
@@ -155,18 +166,27 @@ public class Menu extends JFrame {
 		if(pnlPresentacion.isVisible()) {
 			panelMarcador.setVisible(false);
 		}
-	
+		
+		ImageIcon redicon = new ImageIcon(Menu.class.getResource("/img/luchador.png"));
+		ImageIcon yellowicon = new ImageIcon(Menu.class.getResource("/img/crazy.png"));
+		
 		/*Acciones de los botones*/
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String jugador1 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, null, nombres, nombres[0]);
-				//if(jugador1.equals(nombres[0]))
-					//return jugador1;
-				String jugador2 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #2", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, null, nombres, nombres[0]);
-				/*comandos para empezar a jugar con el metodo anterior
-				Conecta4 jugar = new Conecta4();
-				jugar.start();
-				frame.setVisible(false);*/
+				//Comandos para escoger los dos jugadores 
+				String jugador1 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1 con Ficha Roja", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, redicon, nombres, nombres[0]);
+				String jugador2 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #2 con Ficha Amarilla", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, yellowicon, nombres, nombres[0]);
+				
+				//Comandos para mostrar los jugadores seleccionados
+				//tratar de implmentarlo con switch-case
+				if(jugador1.equalsIgnoreCase("Juan")){
+					lblNombre1.setText(jugador1);
+				}
+				if(jugador2.equalsIgnoreCase("Mateo")) {
+					lblNombre2.setText(jugador2);
+				}
+				
+				//Comandos para mostrar el layout Tablero-------
 				CardLayout c = (CardLayout) panelJuego.getLayout();
 				c.next(panelJuego);
 				c.show(panelJuego, "Tablero");
@@ -174,9 +194,8 @@ public class Menu extends JFrame {
 				btnJugar.setEnabled(false);
 				panelMarcador.setVisible(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
+
 			}
 		});
-	
 	}
-
 }
