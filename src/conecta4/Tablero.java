@@ -26,24 +26,8 @@ public class Tablero extends JPanel {
 
 	private BufferedImage roja;
 	private BufferedImage amarilla;
-	private JLabel fichaAmarilla;
+	//private JLabel fichaAmarilla;
 	//private JLabel fichaRoja;
-	
-	/*
-	 * COORDENADAS DE LOS ESPACIOS
-	 * *******ULTIMA FILA********
-	 * 			y=107 			*
-	 * PRIMERA COLUMNA: x=21;	*
-	 * SEGUNDA COLUMNA: x=91;	*
-	 * TERCERA COLUMNA: x=161;	*
-	 * CUARTA COLUMNA: x=231;	*
-	 * QUINTA COLUMNA: x=301;	*
-	 * SEXTA COLUMNA: x=371;	*
-	 * SEPTIMA COLUMNA: x=441;	*
-	 * **************************
-	 * 
-	 * 
-	 * */
 	
 	public Tablero() {
 		setLayout(null);
@@ -51,8 +35,8 @@ public class Tablero extends JPanel {
 		
 		//ESTO SOLO SIRVE PARA ASIGNAR LA IMAGEN AL OBJETO DEL TIPO BUFFEREDIMAGE
 		try {
-			roja = ImageIO.read(getClass().getResourceAsStream("/img/token_1.png"));
-			amarilla = ImageIO.read(getClass().getResourceAsStream("/img/token_0.png"));
+			roja = ImageIO.read(getClass().getResourceAsStream("/img/Red.png"));
+			amarilla = ImageIO.read(getClass().getResourceAsStream("/img/Amarilla.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,43 +78,43 @@ public class Tablero extends JPanel {
 		JLabel lbl1 = new JLabel();
 		lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl1.setOpaque(false);
-		lbl1.setBounds(21, 42, 60, 60);
+		lbl1.setBounds(27, 42, 60, 60);
 		add(lbl1);
 		
 		JLabel lbl2 = new JLabel();
 		lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl2.setOpaque(false);
-		lbl2.setBounds(91, 42, 60, 60);
+		lbl2.setBounds(97, 42, 60, 60);
 		add(lbl2);
 		
 		JLabel lbl3 = new JLabel();
 		lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl3.setOpaque(false);
-		lbl3.setBounds(161, 42, 60, 60);
+		lbl3.setBounds(167, 42, 60, 60);
 		add(lbl3);
-		/*
+		
 		JLabel lbl4 = new JLabel();
 		lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl4.setOpaque(false);
-		lbl4.setBounds(231, 42, 60, 60);
+		lbl4.setBounds(237, 42, 60, 60);
 		add(lbl4);
-		*/
+		
 		JLabel lbl5 = new JLabel();
 		lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl5.setOpaque(false);
-		lbl5.setBounds(301, 42, 60, 60);
+		lbl5.setBounds(307, 42, 60, 60);
 		add(lbl5);
 		
 		JLabel lbl6 = new JLabel();
 		lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl6.setOpaque(false);
-		lbl6.setBounds(371, 42, 60, 60);
+		lbl6.setBounds(377, 42, 60, 60);
 		add(lbl6);
 		
 		JLabel lbl7 = new JLabel();
 		lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 		lbl7.setOpaque(false);
-		lbl7.setBounds(441, 42, 60, 60);
+		lbl7.setBounds(447, 42, 60, 60);
 		add(lbl7);
 		//ACCIONES DE LOS BOTONES
 		/*Implementar que cuando sea el cambio de turno del jugador, las fichas de muestra cambien de color 
@@ -140,7 +124,7 @@ public class Tablero extends JPanel {
 				lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
 				lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
 				lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-				//lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
+				lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
 				lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
 				lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
 				lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
@@ -151,7 +135,7 @@ public class Tablero extends JPanel {
 				lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 				lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 				lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-				//lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
+				lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 				lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 				lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
 				lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
@@ -167,10 +151,10 @@ public class Tablero extends JPanel {
 		
 		//PINTA LAS FICHAS PRIMERO
 		//FICHAS DE MUESTRA
-		//g.drawImage(roja, 21, 37, roja.getWidth(), roja.getHeight(), null);
-		//g.drawImage(amarilla, 91, 37, amarilla.getWidth(), amarilla.getHeight(), null);
-		//g.drawImage(roja, 161, 37, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(roja, 231, 42, amarilla.getWidth(), amarilla.getHeight(), null);
+		g.drawImage(amarilla, 27, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+		g.drawImage(roja, 97, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+		g.drawImage(amarilla, 167, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+		g.drawImage(roja, 237, 468, amarilla.getWidth(), amarilla.getHeight(), null);
 		/*
 		g.drawImage(roja, 301, 42, roja.getWidth(), roja.getHeight(), null);
 		g.drawImage(roja, 371, 42, amarilla.getWidth(), amarilla.getHeight(), null);

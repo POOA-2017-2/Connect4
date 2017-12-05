@@ -1,0 +1,38 @@
+=====================
+= Fichas : 60x60 px =
+=====================
+
++++++ Renglones +++++
+renglon 1:
+	y = (468 - 528)
+renglon 2:
+	y = (398 - 458)
+renglon 3:
+	y = (328 - 388)
+renglon 4:
+	y = (258 - 318)
+renglon 5:
+	y = (188 - 248)
+renglon 6:
+	y = (118 - 178)
+
++++++ Columnas +++++
+columna 1:
+	x = (27 - 87)
+columna 2:
+	x = (97 - 157)
+columna 3:
+	x = (167 - 227)
+columna 4:
+	x = (237 - 297)
+columna 5:
+	x = (307 - 367)
+columna 6:
+	x = (377 - 437)
+columna 7:
+	x = (447 - 507)
+	
+**************************************
+** Para todos los espacios se deja  **
+** un espacio de 10px de espacio    **
+**************************************
