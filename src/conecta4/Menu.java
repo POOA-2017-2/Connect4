@@ -26,25 +26,6 @@ public class Menu extends JFrame {
 	private static Menu frame;
 	String[] nombres = {"Juan", "Pedro", "Mateo"};
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new Menu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -191,7 +172,9 @@ public class Menu extends JFrame {
 				c.next(panelJuego);
 				c.show(panelJuego, "Tablero");
 				pnlTablero.setFocusable(true);
-				btnJugar.setEnabled(false);
+				btnJugar.setEnabled(false); 
+				
+				//btnJugar.setVisible(false);
 				panelMarcador.setVisible(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
 

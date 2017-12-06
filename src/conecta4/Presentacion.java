@@ -12,12 +12,6 @@ public class Presentacion extends JPanel {
 	public Presentacion() {
 
 	}
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Image imagen = new ImageIcon(Presentacion.class.getResource("/img/conecta4.png")).getImage();
-		int x=getWidth()/2 - imagen.getWidth(this)/2;
-		int y=getHeight()/2 - imagen.getHeight(this)/2;
-		g.drawImage(imagen, x, y, this);
-	}
+	
 
 }
