@@ -31,7 +31,9 @@ public class Tablero extends JPanel implements ActionListener{
 	private BufferedImage amarilla;
 	private JButton btnUno,btnDos,btnTres,btnCuatro,btnCinco,btnSeis,btnSiete;
 	private Ficha[][] Tablero = new Ficha[6][7];
-	
+	public int contador =0;
+	boolean player1=false;
+	boolean player2=false;
 	//private JLabel fichaAmarilla;
 	//private JLabel fichaRoja;
 	
@@ -89,6 +91,9 @@ public class Tablero extends JPanel implements ActionListener{
 		btnSiete = new JButton("7");
 		btnSiete.addActionListener(this);
 		panelBotones.add(btnSiete);
+		
+	
+		
 		
 		//------------------------Fichas de muestra-------------------------------------
 //		JLabel lbl1 = new JLabel();
@@ -184,38 +189,60 @@ public class Tablero extends JPanel implements ActionListener{
 	
 
 
+	
+	
+	public BufferedImage escojeImagen(int contador){
+		if(contador %2==0){
+			player1=true;
+			return amarilla;
+			}
+		else
+			player1=false;
+			player2=true;
+			return roja;
+			}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		int uno=0;
+		//int uno=0;
+		BufferedImage imagen;
+		
 		if(e.getSource() == btnUno){
-			logicaTablero.setFicha(Tablero, amarilla, 0);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 0);
 			repaint();
 			
 		}
 		else if(e.getSource() == btnDos){
-			logicaTablero.setFicha(Tablero, amarilla, 1);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 1);
+			
 			repaint();
 		
 		}
 		else if(e.getSource() == btnTres){
-			logicaTablero.setFicha(Tablero, amarilla, 2);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 2);
 			repaint();
 		}
 		else if(e.getSource() == btnCuatro){
-			logicaTablero.setFicha(Tablero, amarilla, 3);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 3);
 			repaint();
 		}
 		else if(e.getSource() == btnCinco){
-			logicaTablero.setFicha(Tablero, amarilla, 4);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 4);
 			repaint();
 		}
 		else if(e.getSource() == btnSeis){
-			logicaTablero.setFicha(Tablero, amarilla, 5);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 5);
 			repaint();
 		}
 		else {
-			logicaTablero.setFicha(Tablero, amarilla, 6);
+			contador ++;
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 6);
 			repaint();
 		}
 
