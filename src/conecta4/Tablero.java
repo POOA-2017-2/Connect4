@@ -186,19 +186,33 @@ public class Tablero extends JPanel implements ActionListener{
 		g.drawImage(imagen, x, y, this);
 	}
 	
-	
+	public int escojeJugador(int contador){
+		int tipo =0;
+		if(contador %2==0){
+			
+			tipo =1;
+		
+			}
+		else{
+			tipo = 2;
+		}	
+		return tipo;
+		}
 
 
 	
 	
 	public BufferedImage escojeImagen(int contador){
+		boolean player = false;
 		if(contador %2==0){
 			player1=true;
+			
 			return amarilla;
 			}
 		else
 			player1=false;
-			player2=true;
+			player2=false;
+			
 			return roja;
 			}
 	@Override
@@ -209,40 +223,41 @@ public class Tablero extends JPanel implements ActionListener{
 		
 		if(e.getSource() == btnUno){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 0);
+			
+			logicaTablero.setFicha(Tablero, escojeImagen(contador),0,escojeJugador(contador));
 			repaint();
 			
 		}
 		else if(e.getSource() == btnDos){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 1);
+			logicaTablero.setFicha(Tablero, escojeImagen(contador),1,escojeJugador(contador));
 			
 			repaint();
 		
 		}
 		else if(e.getSource() == btnTres){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 2);
+			logicaTablero.setFicha(Tablero, escojeImagen(contador),2,escojeJugador(contador));
 			repaint();
 		}
 		else if(e.getSource() == btnCuatro){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 3);
+			logicaTablero.setFicha(Tablero, escojeImagen(contador),3, escojeJugador(contador));
 			repaint();
 		}
 		else if(e.getSource() == btnCinco){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 4);
+			logicaTablero.setFicha(Tablero, escojeImagen(contador),4, escojeJugador(contador));
 			repaint();
 		}
 		else if(e.getSource() == btnSeis){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 5);
+			logicaTablero.setFicha(Tablero, escojeImagen(contador),5, escojeJugador(contador));
 			repaint();
 		}
 		else {
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 6);
+			logicaTablero.setFicha(Tablero, escojeImagen(contador), 6,escojeJugador(contador));
 			repaint();
 		}
 
