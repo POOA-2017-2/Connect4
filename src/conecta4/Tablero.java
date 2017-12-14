@@ -26,6 +26,7 @@ public class Tablero extends JPanel {
 
 	private BufferedImage roja;
 	private BufferedImage amarilla;
+	private BufferedImage ball;
 	//private JLabel fichaAmarilla;
 	//private JLabel fichaRoja;
 	
@@ -37,6 +38,7 @@ public class Tablero extends JPanel {
 		try {
 			roja = ImageIO.read(getClass().getResourceAsStream("/img/Red.png"));
 			amarilla = ImageIO.read(getClass().getResourceAsStream("/img/Amarilla.png"));
+			ball = ImageIO.read(getClass().getResourceAsStream("/img/ballnew.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,10 +153,13 @@ public class Tablero extends JPanel {
 		
 		//PINTA LAS FICHAS PRIMERO
 		//FICHAS DE MUESTRA
+		g.drawImage(ball, 23, 43, ball.getWidth(), ball.getHeight(), null);
+		
 		g.drawImage(amarilla, 27, 468, amarilla.getWidth(), amarilla.getHeight(), null);
 		g.drawImage(roja, 97, 468, amarilla.getWidth(), amarilla.getHeight(), null);
 		g.drawImage(amarilla, 167, 468, amarilla.getWidth(), amarilla.getHeight(), null);
 		g.drawImage(roja, 237, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+		
 		/*
 		g.drawImage(roja, 301, 42, roja.getWidth(), roja.getHeight(), null);
 		g.drawImage(roja, 371, 42, amarilla.getWidth(), amarilla.getHeight(), null);

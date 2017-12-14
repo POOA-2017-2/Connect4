@@ -12,12 +12,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
@@ -35,6 +41,7 @@ public class Menu extends JFrame {
 				try {
 					frame = new Menu();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,7 +51,7 @@ public class Menu extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */
+	 */	
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -62,7 +69,6 @@ public class Menu extends JFrame {
 		
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
 		mnArchivo.add(mntmNuevo);
-		mntmNuevo.setEnabled(false);
 		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(new ActionListener() {
@@ -133,6 +139,7 @@ public class Menu extends JFrame {
 		JLabel lblMarcador = new JLabel("Marcador1");
 		lblMarcador.setForeground(Color.RED);
 		panelMarcador.add(lblMarcador);
+		panelMarcador.setVisible(false);
 		
 		JLabel lblNombre1 = new JLabel("Nombre1");
 		lblNombre1.setForeground(Color.RED);
@@ -163,8 +170,9 @@ public class Menu extends JFrame {
 		Tablero pnlTablero = new Tablero();
 		panelJuego.add(pnlTablero, "Tablero");
 		
+		////agregado
 		if(pnlPresentacion.isVisible()) {
-			panelMarcador.setVisible(false);
+			mntmNuevo.setEnabled(false);
 		}
 		
 		ImageIcon redicon = new ImageIcon(Menu.class.getResource("/img/luchador.png"));
@@ -194,8 +202,15 @@ public class Menu extends JFrame {
 				btnJugar.setEnabled(false);
 				panelMarcador.setVisible(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
+				
+				///agregado
+				if(pnlTablero.isVisible()) {
+					panelMarcador.setVisible(true);
+					mntmNuevo.setEnabled(true);
+				}
 
 			}
 		});
 	}
+	
 }
