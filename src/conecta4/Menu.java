@@ -32,6 +32,7 @@ public class Menu extends JFrame {
 	private static Menu frame;
 	String[] nombres = {"Juan", "Pedro", "Mateo"};
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +53,7 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */	
+
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -69,14 +71,11 @@ public class Menu extends JFrame {
 		
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
 		mnArchivo.add(mntmNuevo);
+		mntmNuevo.setEnabled(false);
 		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mntmSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-			}
-		});
 		mnArchivo.add(mntmSalir);
+		
 		
 		JMenu mnEditar = new JMenu("Editar");
 		menuBar.add(mnEditar);
@@ -94,19 +93,19 @@ public class Menu extends JFrame {
 		menuBar.add(mnVer);
 		
 		JMenuItem mntmEstadisticas = new JMenuItem("Estadisticas");
-		mntmEstadisticas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Estadisticas est = new Estadisticas();
-				est.setVisible(true);
-			}
-		});
 		mnVer.add(mntmEstadisticas);
 		
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
 		
-		JMenuItem mntmReglas = new JMenuItem("Reglas");
-		mnAyuda.add(mntmReglas);
+		JMenuItem mntmInstrucciones = new JMenuItem("Instrucciones");
+		mntmInstrucciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Instrucciones ins = new Instrucciones();
+				ins.setVisible(true);
+			}
+		});
+		mnAyuda.add(mntmInstrucciones);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mntmDesarrolladores.addActionListener(new ActionListener() {
@@ -116,6 +115,7 @@ public class Menu extends JFrame {
 			}
 		});
 		mnAyuda.add(mntmDesarrolladores);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -126,11 +126,18 @@ public class Menu extends JFrame {
 		panelBotones.setBackground(Color.WHITE);
 		contentPane.add(panelBotones, BorderLayout.SOUTH);
 		
-		JButton btnJugar = new JButton("Jugar!");
-		btnJugar.setIcon(new ImageIcon(Menu.class.getResource("/com/sun/java/swing/plaf/windows/icons/HomeFolder.gif")));
-		btnJugar.setForeground(Color.RED);
-		btnJugar.setBackground(Color.YELLOW);
-		panelBotones.add(btnJugar);
+		
+		JButton btnOneScreen = new JButton("Una Pantalla");
+		btnOneScreen.setIcon(new ImageIcon(Menu.class.getResource("/javax/swing/plaf/metal/icons/ocean/expanded.gif")));
+		btnOneScreen.setForeground(Color.RED);
+		btnOneScreen.setBackground(Color.YELLOW);
+		panelBotones.add(btnOneScreen);
+		
+		JButton btnTwoScreen = new JButton("Pantalla Dividida");
+		btnTwoScreen.setBackground(Color.YELLOW);
+		btnTwoScreen.setForeground(Color.RED);
+		btnTwoScreen.setIcon(new ImageIcon(Menu.class.getResource("/javax/swing/plaf/metal/icons/ocean/collapsed.gif")));
+		panelBotones.add(btnTwoScreen);
 		
 		JPanel panelMarcador = new JPanel();
 		panelMarcador.setBackground(new Color(47, 79, 79));
@@ -178,9 +185,11 @@ public class Menu extends JFrame {
 		ImageIcon redicon = new ImageIcon(Menu.class.getResource("/img/luchador.png"));
 		ImageIcon yellowicon = new ImageIcon(Menu.class.getResource("/img/crazy.png"));
 		
-		/*Acciones de los botones*/
-		btnJugar.addActionListener(new ActionListener() {
+		//Acciones de los botones
+		////BOTON UNA PANTALLA
+		btnOneScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				//Comandos para escoger los dos jugadores 
 				String jugador1 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1 con Ficha Roja", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, redicon, nombres, nombres[0]);
 				String jugador2 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #2 con Ficha Amarilla", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, yellowicon, nombres, nombres[0]);
@@ -199,18 +208,70 @@ public class Menu extends JFrame {
 				c.next(panelJuego);
 				c.show(panelJuego, "Tablero");
 				pnlTablero.setFocusable(true);
-				btnJugar.setEnabled(false);
-				panelMarcador.setVisible(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
 				
-				///agregado
+				//validaciones
 				if(pnlTablero.isVisible()) {
 					panelMarcador.setVisible(true);
 					mntmNuevo.setEnabled(true);
+					btnOneScreen.setEnabled(false); 	
+					btnTwoScreen.setEnabled(false);
+					mntmEstadisticas.setEnabled(false);
+					mntmAgregarUsuario.setEnabled(false);
 				}
-
 			}
 		});
+		
+		////BOTON NUEVO
+		mntmNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(pnlTablero.isVisible()) {
+					CardLayout c = (CardLayout) panelJuego.getLayout();
+					c.next(panelJuego);
+					c.show(panelJuego, "Presentacion");
+					pnlPresentacion.setFocusable(true);
+					
+					panelMarcador.setVisible(false);
+					btnOneScreen.setEnabled(true);
+					btnTwoScreen.setEnabled(true);
+					panelBotones.setBackground(Color.WHITE);
+					mntmNuevo.setEnabled(false);
+					mntmEstadisticas.setEnabled(true);
+					mntmAgregarUsuario.setEnabled(true);
+				}
+			}
+		});
+		
+		/////BOTON ESTADISTICAS
+		mntmEstadisticas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Estadisticas est = new Estadisticas();
+				if(pnlTablero.isVisible()) {
+					mntmEstadisticas.setEnabled(false);	
+				}
+				else if(pnlPresentacion.isVisible()) {
+					mntmEstadisticas.setEnabled(true);
+					est.setVisible(true);
+				}
+			}
+		});
+		
+	/////BOTON SALIR
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(pnlPresentacion.isVisible()) {
+					System.exit(0);
+				}
+				else if(pnlTablero.isVisible()) {
+					int reply = JOptionPane.showConfirmDialog(contentPane, "Estas Seguro que quieres salir? ","Salir del juego",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+					if(reply == JOptionPane.YES_OPTION) {
+						System.exit(0);
+					}
+				}
+			}
+		});
+		
+		
+
 	}
-	
 }
