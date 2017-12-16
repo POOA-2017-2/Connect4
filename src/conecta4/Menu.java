@@ -203,7 +203,8 @@ public class Menu extends JFrame {
 				c.show(panelJuego, "Tablero");
 				pnlTablero.setFocusable(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
-				music.stop();
+				music.stop(); //Detienen la musica del menu
+				//Comienza la musica del juego
 				music = new Musica("/music/battle.wav");
 				music.play();
 				
