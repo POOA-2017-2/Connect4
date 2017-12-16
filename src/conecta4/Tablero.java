@@ -177,13 +177,13 @@ public class Tablero extends JPanel implements ActionListener{
 		//PINTA LAS FICHAS PRIMERO
 		//FICHAS DE MUESTRA
 
-		g.drawImage(ball, 23, 43, ball.getWidth(), ball.getHeight(), null);
-		
-		g.drawImage(amarilla, 27, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(roja, 97, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(amarilla, 167, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(roja, 237, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-		
+//		g.drawImage(ball, 23, 43, ball.getWidth(), ball.getHeight(), null);
+//		
+//		g.drawImage(amarilla, 27, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+//		g.drawImage(roja, 97, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+//		g.drawImage(amarilla, 167, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+//		g.drawImage(roja, 237, 468, amarilla.getWidth(), amarilla.getHeight(), null);
+//		
 		/*
 		g.drawImage(roja, 301, 42, roja.getWidth(), roja.getHeight(), null);
 		g.drawImage(roja, 371, 42, amarilla.getWidth(), amarilla.getHeight(), null);

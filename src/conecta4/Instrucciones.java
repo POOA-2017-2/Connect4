@@ -30,9 +30,7 @@ public class Instrucciones extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+	
 	public Instrucciones() {
 		setTitle("Instrucciones del Juego");
 		setBounds(100, 100, 575, 300);
