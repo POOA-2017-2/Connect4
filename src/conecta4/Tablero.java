@@ -37,6 +37,7 @@ public class Tablero extends JPanel implements ActionListener{
 	boolean player1=false;
 	boolean player2=false;
 
+	private Musica sound;
 	//private JLabel fichaAmarilla;
 	//private JLabel fichaRoja;
 	
@@ -239,6 +240,8 @@ public class Tablero extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		//int uno=0;
 		BufferedImage imagen;
+		sound = new Musica("/music/token.wav");
+		sound.play();
 		
 		if(e.getSource() == btnUno){
 			contador ++;
