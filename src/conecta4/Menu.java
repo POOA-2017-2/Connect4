@@ -12,26 +12,20 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
 	private static Menu frame;
+	private static Musica music;
+	
 	String[] nombres = {"Juan", "Pedro", "Mateo"};
-
 
 	/**
 	 * Launch the application.
@@ -42,7 +36,6 @@ public class Menu extends JFrame {
 				try {
 					frame = new Menu();
 					frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -126,7 +119,6 @@ public class Menu extends JFrame {
 		panelBotones.setBackground(Color.WHITE);
 		contentPane.add(panelBotones, BorderLayout.SOUTH);
 		
-		
 		JButton btnOneScreen = new JButton("Una Pantalla");
 		btnOneScreen.setIcon(new ImageIcon(Menu.class.getResource("/javax/swing/plaf/metal/icons/ocean/expanded.gif")));
 		btnOneScreen.setForeground(Color.RED);
@@ -177,9 +169,11 @@ public class Menu extends JFrame {
 		Tablero pnlTablero = new Tablero();
 		panelJuego.add(pnlTablero, "Tablero");
 		
-		////agregado
+		////Musica del menu
 		if(pnlPresentacion.isVisible()) {
 			mntmNuevo.setEnabled(false);
+			music = new Musica("/music/menu.wav");
+			music.play();
 		}
 		
 		ImageIcon redicon = new ImageIcon(Menu.class.getResource("/img/luchador.png"));
@@ -203,12 +197,15 @@ public class Menu extends JFrame {
 					lblNombre2.setText(jugador2);
 				}
 				
-				//Comandos para mostrar el layout Tablero-------
+				//Comandos para comenzar a jugar en el layout Tablero-------
 				CardLayout c = (CardLayout) panelJuego.getLayout();
 				c.next(panelJuego);
 				c.show(panelJuego, "Tablero");
 				pnlTablero.setFocusable(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
+				music.stop();
+				music = new Musica("/music/battle.wav");
+				music.play();
 				
 				//validaciones
 				if(pnlTablero.isVisible()) {
@@ -226,11 +223,16 @@ public class Menu extends JFrame {
 		mntmNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(pnlTablero.isVisible()) {
+					music.stop(); //Detiene la musica actual de batalla
 					CardLayout c = (CardLayout) panelJuego.getLayout();
 					c.next(panelJuego);
 					c.show(panelJuego, "Presentacion");
 					pnlPresentacion.setFocusable(true);
+					//Pone la musica del menu
+					music = new Musica("/music/menu.wav");
+					music.play();
 					
+					//Validaciones en botones
 					panelMarcador.setVisible(false);
 					btnOneScreen.setEnabled(true);
 					btnTwoScreen.setEnabled(true);
@@ -270,8 +272,5 @@ public class Menu extends JFrame {
 				}
 			}
 		});
-		
-		
-
 	}
 }
