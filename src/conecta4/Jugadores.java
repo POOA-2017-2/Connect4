@@ -2,14 +2,14 @@ package conecta4;
 
 import java.io.Serializable;
 
-public class Usuarios implements Serializable{
+public class Jugadores implements Serializable{
 /*Clase con la que se trabajara con los datos de lo usuarios registrados*/
 	
 	private String nombre;
 	private String nickname;
-	private int edad;
+	private String edad;
 	
-	public Usuarios(String nombre, String nickname,int edad) {
+	public Jugadores(String nombre, String nickname,String edad) {
 		super();
 		this.nombre = nombre;
 		this.nickname = nickname;
@@ -32,11 +32,11 @@ public class Usuarios implements Serializable{
 		this.nickname = nickname;
 	}
 
-	public int getEdad() {
+	public String getEdad() {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
+	public void setEdad(String edad) {
 		this.edad = edad;
 	}
 	

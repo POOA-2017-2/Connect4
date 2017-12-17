@@ -35,13 +35,37 @@ import java.awt.event.ActionEvent;
 
 public class Registro extends JFrame {
 
+	/*Clon de la clase Registro para testear*/
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtID;
 	private JTextField txtEdad;
+	//private Object[] ob;
 	
-	DefaultListModel<Usuarios> modelo = new DefaultListModel<Usuarios>();
+	DefaultListModel<Jugadores> modelo = new DefaultListModel<Jugadores>();
+	//String[] lista = (String[]) modelo.toArray();
+	//String lista [] = new String[modelo.size()];
+	//public Object[] ob = new Object[modelo.size()];
 	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Registro frame = new Registro();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
 	public Registro() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
@@ -128,19 +152,19 @@ public class Registro extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				int index = list.getSelectedIndex();
 				if(index!=-1) {
-					Usuarios us = modelo.get(index);
+					Jugadores us = modelo.get(index);
 					txtNombre.setText(modelo.getElementAt(index).getNombre());
 					txtID.setText(modelo.getElementAt(index).getNickname());
-					txtEdad.setText(String.valueOf(modelo.getElementAt(index).getEdad()));	
+					txtEdad.setText(modelo.getElementAt(index).getEdad());	
 				}
 			}	
 		});
 		scrollPane.setViewportView(list);
 		
 		try {
-			FileInputStream file = new FileInputStream("personas.txt");
+			FileInputStream file = new FileInputStream("Jugadores.txt");
 			ObjectInputStream ois = new ObjectInputStream(file);
-			modelo = (DefaultListModel<Usuarios>)ois.readObject();
+			modelo = (DefaultListModel<Jugadores>)ois.readObject();
 			file.close();
 			ois.close();
 		} catch (FileNotFoundException e1) {
@@ -155,6 +179,8 @@ public class Registro extends JFrame {
 		}
 	
 		list.setModel(modelo);
+		// = modelo.toArray(lista);		
+		//
 		
 		//Acciones de los botones
 		btnAgregar.addActionListener(new ActionListener() {
@@ -165,13 +191,17 @@ public class Registro extends JFrame {
 				else {
 				String nombre = txtNombre.getText();
 				String nickname = txtID.getText();
-				int edad = Integer.parseInt(txtEdad.getText());
+				String edad = txtEdad.getText();
 				int index;
-				Usuarios us = new Usuarios(nombre,nickname,edad);
+				Jugadores us = new Jugadores(nombre,nickname,edad);
 				modelo.addElement(us);
-
+				//Object[] ob = modelo.toArray(nickname);
+				//System.out.println(ob);
+				//lista[index] = txtNombre.getText();
+				//lista = (String[]) modelo.toArray();
+				//System.out.println(lista);
 				try {
-					FileOutputStream file = new FileOutputStream("personas.txt");
+					FileOutputStream file = new FileOutputStream("Jugadores.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
 					oos.writeObject(modelo);
 					file.close();
@@ -184,6 +214,7 @@ public class Registro extends JFrame {
 					e.printStackTrace();
 				}
 				}
+				
 			}
 		});
 		btnEditar.addActionListener(new ActionListener() {
@@ -191,11 +222,12 @@ public class Registro extends JFrame {
 				int index = list.getSelectedIndex();
 				String nombre = txtNombre.getText();
 				String nickname = txtID.getText();
-				int edad = Integer.parseInt(txtEdad.getText());
-				Usuarios us = new Usuarios(nombre,nickname,edad);
+				String edad = txtEdad.getText();
+				Jugadores us = new Jugadores(nombre,nickname,edad);
 				modelo.setElementAt(us, index);
+				//modelo.copyInto(ob);
 				try {
-					FileOutputStream file = new FileOutputStream("personas.txt");
+					FileOutputStream file = new FileOutputStream("Jugadores.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
 					oos.writeObject(modelo);
 					file.close();
@@ -212,13 +244,14 @@ public class Registro extends JFrame {
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
-				Usuarios us = modelo.get(index);
+				Jugadores us = modelo.get(index);
 				modelo.remove(index);
 				txtEdad.setText(null);
 				txtID.setText(null);
 				txtNombre.setText(null);
+				String opcion = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1", "Escoger jugador", JOptionPane.INFORMATION_MESSAGE, null, modelo.toArray(), null);
 				try {
-					FileOutputStream file = new FileOutputStream("personas.txt");
+					FileOutputStream file = new FileOutputStream("Jugadores.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
 					file.close();
 					oos.close();
@@ -231,8 +264,11 @@ public class Registro extends JFrame {
 				}
 			}
 		});
+	//modelo.copyInto(lista);
+		//modelo.copyInto(ob);
 	
 	}
+
 	
 }
 /*Implementar el metodo CopyInto(Object[] anArray para desplegarlo al inicio del juego)*/

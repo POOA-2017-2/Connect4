@@ -15,8 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.sound.sampled.Clip;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
@@ -25,11 +30,8 @@ public class Menu extends JFrame {
 	private static Menu frame;
 	private static Musica music;
 	
-	String[] nombres = {"Juan", "Pedro", "Mateo"};
-
-	/**
-	 * Launch the application.
-	 */
+	DefaultListModel<Jugadores> modelo = new DefaultListModel<Jugadores>();
+/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,10 +44,7 @@ public class Menu extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */	
+*/
 
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,11 +168,29 @@ public class Menu extends JFrame {
 		Tablero pnlTablero = new Tablero();
 		panelJuego.add(pnlTablero, "Tablero");
 		
-		////Musica del menu
+		////Validaciones para el Menu y Musica del Menu
 		if(pnlPresentacion.isVisible()) {
 			mntmNuevo.setEnabled(false);
 			music = new Musica("/music/menu.wav");
 			music.play();
+		}
+		
+		//Comandos para leer el archivo Jugadores 
+		try {
+			FileInputStream fis = new FileInputStream("Jugadores.txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			modelo = (DefaultListModel<Jugadores>)ois.readObject();
+			fis.close();
+			ois.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		
 		ImageIcon redicon = new ImageIcon(Menu.class.getResource("/img/luchador.png"));
@@ -185,17 +202,11 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				//Comandos para escoger los dos jugadores 
-				String jugador1 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1 con Ficha Roja", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, redicon, nombres, nombres[0]);
-				String jugador2 = (String) JOptionPane.showInputDialog(contentPane, "Jugador #2 con Ficha Amarilla", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, yellowicon, nombres, nombres[0]);
+				Object jugador1 = JOptionPane.showInputDialog(contentPane, "Jugador #1 con Ficha Roja", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, redicon, modelo.toArray(), null);
+				lblNombre1.setText(jugador1.toString());
 				
-				//Comandos para mostrar los jugadores seleccionados
-				//tratar de implmentarlo con switch-case
-				if(jugador1.equalsIgnoreCase("Juan")){
-					lblNombre1.setText(jugador1);
-				}
-				if(jugador2.equalsIgnoreCase("Mateo")) {
-					lblNombre2.setText(jugador2);
-				}
+				Object jugador2 = JOptionPane.showInputDialog(contentPane, "Jugador #2 con Ficha Amarilla", "Escoger Jugador", JOptionPane.INFORMATION_MESSAGE, yellowicon, modelo.toArray(), null);
+				lblNombre2.setText(jugador2.toString());
 				
 				//Comandos para comenzar a jugar en el layout Tablero-------
 				CardLayout c = (CardLayout) panelJuego.getLayout();
@@ -204,8 +215,7 @@ public class Menu extends JFrame {
 				pnlTablero.setFocusable(true);
 				panelBotones.setBackground(new Color(47, 79, 79));
 				music.stop(); //Detienen la musica del menu
-				//Comienza la musica del juego
-				music = new Musica("/music/battle.wav");
+				music = new Musica("/music/battle.wav"); //Comienza la musica del juego
 				music.play();
 				
 				//validaciones

@@ -3,7 +3,7 @@ package conecta4;
 import java.awt.EventQueue;
 
 import javax.swing.JPanel;
-
+	
 public class Main {
 	private static Menu frame;
 
