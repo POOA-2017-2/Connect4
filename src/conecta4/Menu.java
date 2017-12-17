@@ -134,12 +134,12 @@ public class Menu extends JFrame {
 		panelMarcador.setBackground(new Color(47, 79, 79));
 		contentPane.add(panelMarcador, BorderLayout.NORTH);
 		
-		JLabel lblMarcador = new JLabel("Marcador1");
+		JLabel lblMarcador = new JLabel("");
 		lblMarcador.setForeground(Color.RED);
 		panelMarcador.add(lblMarcador);
 		panelMarcador.setVisible(false);
 		
-		JLabel lblNombre1 = new JLabel("Nombre1");
+		JLabel lblNombre1 = new JLabel("");
 		lblNombre1.setForeground(Color.RED);
 		panelMarcador.add(lblNombre1);
 		
@@ -147,11 +147,11 @@ public class Menu extends JFrame {
 		lblVs.setForeground(Color.WHITE);
 		panelMarcador.add(lblVs);
 		
-		JLabel lblNombre2 = new JLabel("Nombre2");
+		JLabel lblNombre2 = new JLabel("");
 		lblNombre2.setForeground(Color.YELLOW);
 		panelMarcador.add(lblNombre2);
 		
-		JLabel lblMarcador2 = new JLabel("Marcador2");
+		JLabel lblMarcador2 = new JLabel("");
 		lblMarcador2.setForeground(Color.YELLOW);
 		panelMarcador.add(lblMarcador2);
 		

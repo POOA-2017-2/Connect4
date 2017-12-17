@@ -21,6 +21,10 @@ import logica.logicaTablero;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.BorderLayout;
 
 /*Panel para dibujar el tablero donde se estara jugando.
  * CardLayout del Juego*/
@@ -30,14 +34,14 @@ public class Tablero extends JPanel implements ActionListener{
 	private BufferedImage roja;
 	private BufferedImage amarilla;
 	private BufferedImage ball;
+	
 
-	private JButton btnUno,btnDos,btnTres,btnCuatro,btnCinco,btnSeis,btnSiete;
+	private JButton btnUno,btnDos,btnTres,btnCuatro,btnCinco,btnSeis,btnSiete,btnReset;
 	private Ficha[][] Tablero = new Ficha[6][7];
 	public int contador =0;
-	boolean player1=false;
-	boolean player2=false;
-
+	
 	private Musica sound;
+	private JTextField txtField;
 	//private JLabel fichaAmarilla;
 	//private JLabel fichaRoja;
 	
@@ -60,17 +64,14 @@ public class Tablero extends JPanel implements ActionListener{
 		
 		JPanel panelBotones = new JPanel();
 		panelBotones.setBorder(new LineBorder(new Color(255, 215, 0)));
-		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
-		flowLayout.setVgap(6);
-		flowLayout.setAlignOnBaseline(true);
-		flowLayout.setHgap(26);
-		panelBotones.setBounds(0, 0, 550, 35);
+		panelBotones.setBounds(0, 0, 450, 35);
 		panelBotones.setBackground(new Color(47, 79, 79));
 		add(panelBotones);
 		
 		btnUno = new JButton("1");
 
 		btnUno.addActionListener(this);
+		panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panelBotones.add(btnUno);
 		
 		btnDos = new JButton("2");
@@ -97,99 +98,34 @@ public class Tablero extends JPanel implements ActionListener{
 		btnSiete.addActionListener(this);
 		panelBotones.add(btnSiete);
 		
-	
+		
+		txtField = new JTextField();
+		txtField.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		txtField.setHorizontalAlignment(SwingConstants.CENTER);
+		txtField.setForeground(new Color(255, 255, 224));
+		txtField.setBackground(new Color(47, 79, 79));
+		txtField.setText("EMPATE");
+		txtField.setEditable(false);
+		txtField.setBounds(107, 46, 268, 51);
+		add(txtField);
+		txtField.setColumns(10);
+		
+		btnReset = new JButton();
+		btnReset.setBounds(10, 46, 87, 51);
+		add(btnReset);
+		btnReset.addActionListener(this);
+		btnReset.setText("Reset");
 		
 		
-		//------------------------Fichas de muestra-------------------------------------
-//		JLabel lbl1 = new JLabel();
-//		lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl1.setOpaque(false);
-//		lbl1.setBounds(27, 42, 60, 60);
-//		add(lbl1);
-//		
-//		JLabel lbl2 = new JLabel();
-//		lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl2.setOpaque(false);
-//		lbl2.setBounds(97, 42, 60, 60);
-//		add(lbl2);
-//		
-//		JLabel lbl3 = new JLabel();
-//		lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl3.setOpaque(false);
-//		lbl3.setBounds(167, 42, 60, 60);
-//		add(lbl3);
-//		
-//		JLabel lbl4 = new JLabel();
-//		lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl4.setOpaque(false);
-//		lbl4.setBounds(237, 42, 60, 60);
-//		add(lbl4);
-//		
-//		JLabel lbl5 = new JLabel();
-//		lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl5.setOpaque(false);
-//		lbl5.setBounds(307, 42, 60, 60);
-//		add(lbl5);
-//		
-//		JLabel lbl6 = new JLabel();
-//		lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl6.setOpaque(false);
-//		lbl6.setBounds(377, 42, 60, 60);
-//		add(lbl6);
-//		
-//		JLabel lbl7 = new JLabel();
-//		lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//		lbl7.setOpaque(false);
-//		lbl7.setBounds(447, 42, 60, 60);
-//		add(lbl7);
-		//ACCIONES DE LOS BOTONES
-		/*Implementar que cuando sea el cambio de turno del jugador, las fichas de muestra cambien de color 
-		al turno correspiente*/
-//		btnUno.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//				lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//				lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//				lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//				lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//				lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//				lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Roja.png")));
-//			}
-//		});
-//		btnDos.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				lbl1.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//				lbl2.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//				lbl3.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//				lbl4.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//				lbl5.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//				lbl6.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//				lbl7.setIcon(new ImageIcon(Tablero.class.getResource("/img/Amarilla.png")));
-//			}
-//		});
-		
-	}
+		txtField.setVisible(false);
+}
 	
 	
 	public void paintComponent(Graphics g) {
 		/*Metodo que pinta el Tablero*/
 		
 		super.paintComponent(g);
-		//PINTA LAS FICHAS PRIMERO
-		//FICHAS DE MUESTRA
-
-//		g.drawImage(ball, 23, 43, ball.getWidth(), ball.getHeight(), null);
-//		
-//		g.drawImage(amarilla, 27, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-//		g.drawImage(roja, 97, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-//		g.drawImage(amarilla, 167, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-//		g.drawImage(roja, 237, 468, amarilla.getWidth(), amarilla.getHeight(), null);
-//		
-		/*
-		g.drawImage(roja, 301, 42, roja.getWidth(), roja.getHeight(), null);
-		g.drawImage(roja, 371, 42, amarilla.getWidth(), amarilla.getHeight(), null);
-		g.drawImage(roja, 441, 42, roja.getWidth(), roja.getHeight(), null);
-		*/
+	
 
 		for(int i=0;i<6;i++){
 			for(int j=0;j<7;j++){
@@ -204,6 +140,7 @@ public class Tablero extends JPanel implements ActionListener{
 		int x=getWidth()/2 - imagen.getWidth(this)/2;
 		int y=getHeight()/1 - imagen.getHeight(this)/1;
 		g.drawImage(imagen, x, y, this);
+		btnReset.setVisible(true);
 	}
 	
 	public int escojeJugador(int contador){
@@ -219,19 +156,17 @@ public class Tablero extends JPanel implements ActionListener{
 		return tipo;
 		}
 
-
 	
 	
 	public BufferedImage escojeImagen(int contador){
-		boolean player = false;
+		
 		if(contador %2==0){
-			player1=true;
+			
 			
 			return amarilla;
 			}
 		else
-			player1=false;
-			player2=false;
+			
 			
 			return roja;
 			}
@@ -246,43 +181,78 @@ public class Tablero extends JPanel implements ActionListener{
 		if(e.getSource() == btnUno){
 			contador ++;
 			
-			logicaTablero.setFicha(Tablero, escojeImagen(contador),0,escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 0,escojeJugador(contador)),contador);
 			repaint();
 			
 		}
 		else if(e.getSource() == btnDos){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador),1,escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 1,escojeJugador(contador)),contador);
 			
 			repaint();
 		
 		}
 		else if(e.getSource() == btnTres){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador),2,escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 2,escojeJugador(contador)),contador);
 			repaint();
 		}
 		else if(e.getSource() == btnCuatro){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador),3, escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 3,escojeJugador(contador)),contador);
 			repaint();
 		}
 		else if(e.getSource() == btnCinco){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador),4, escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 4,escojeJugador(contador)),contador);
 			repaint();
 		}
 		else if(e.getSource() == btnSeis){
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador),5, escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 5,escojeJugador(contador)),contador);
 			repaint();
 		}
 		else {
 			contador ++;
-			logicaTablero.setFicha(Tablero, escojeImagen(contador), 6,escojeJugador(contador));
+			ganador(logicaTablero.setFicha(Tablero, escojeImagen(contador), 6,escojeJugador(contador)),contador);
+			//logicaTablero.setFicha(Tablero, escojeImagen(contador), 6,escojeJugador(contador));
 			repaint();
 		}
-
+		if(e.getSource() == btnReset){
+			logicaTablero.llenarTablero(Tablero);
+			controlBotones(true);
+			txtField.setText(" ");
+			contador = 0;
+			sound.stop();
+			
+			repaint();
+			
+		}
 	}
-	
+	public void ganador(int ganador,int contador){
+		System.out.println(" "+ganador);
+		if(ganador==1||ganador==2){
+			Image imagen=new ImageIcon(Tablero.class.getResource("/img/Red.png")).getImage();
+			txtField.setText("GANADOR "+ganador );
+			txtField.setVisible(true);
+			
+			controlBotones(false);
+			sound = new Musica("/music/win.wav");
+			sound.play();
+			
+		}
+		if(contador == 42&&ganador==0){
+			txtField.setVisible(true);
+			
+		}
+	}
+	public void controlBotones(boolean afirma){
+		btnUno.setEnabled(afirma);
+		btnDos.setEnabled(afirma);
+		btnTres.setEnabled(afirma);
+		btnCuatro.setEnabled(afirma);
+		btnCinco.setEnabled(afirma);
+		btnSeis.setEnabled(afirma);
+		btnSiete.setEnabled(afirma);
+	}
 }

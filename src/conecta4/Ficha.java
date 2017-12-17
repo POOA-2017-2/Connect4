@@ -12,6 +12,7 @@ public class Ficha {
 	private int jugador;
 	
 	
+	
 	public Ficha(BufferedImage color, int x, int y, int ancho, int alto, int jugador) {
 		Color = color;
 		this.x = x;

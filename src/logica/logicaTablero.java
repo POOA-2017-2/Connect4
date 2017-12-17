@@ -9,24 +9,42 @@ import conecta4.Ficha;
 
 public class logicaTablero {
 
-	public static void setFicha(Ficha[][] tablero,BufferedImage color,int x,int jugador){
-		//System.out.println(x);
+	public static int setFicha(Ficha[][] tablero,BufferedImage color,int x,int jugador){
+		////system.out.println(x);
 		for(int j=5;j>=0;j--){
 			if(tablero[j][x].getColor()== null){
 				tablero[j][x].setColor(color);
 				tablero[j][x].setJugador(jugador);
-				// aqui en x lo mando desde la ficha y Y lo mando manualmente aca abajo.
-				//                                          x , y  
-				System.out.println(DiagonalDerArriba(tablero,x,3,jugador) );
-				//System.out.println("" + Ganador(tablero));
+				int resultadoValida=valida(tablero,x,j,jugador);
+				//System.out.println(resultadoValida);
+				if(resultadoValida==1||resultadoValida==2){
+				//	System.out.println(resultadoValida);
+					return jugador;
+				}
 				break;
 			}
 		}
+	return 0;
+	}		
+	public static int valida(Ficha[][] ficha, int x, int y,int jugador)	{
+		int num;
 		
-		
-		
-		
-		
+		num = vertical(ficha,x,y,jugador);
+		if(num!=0)
+			return num;
+		num=horizontalIzq(ficha,x,y,jugador);
+		if(num!=0)
+			return num;
+	
+		num=horizontalDer(ficha,x,y,jugador);
+		if(num!=0)
+			return num;
+		//num=DiagonalIzqArriba(ficha,x,y,jugador);
+		//num=DiagonalIzqAbajo(ficha,x,y,jugador);
+		//num=DiagonalDerAbajo(ficha,x,y,jugador);
+		//num=DiagonalDerArriba(ficha,x,y,jugador);
+		//System.out.println(num);
+		return num;
 	}
 	public static void llenarTablero(Ficha[][] tablero){
 		int x=27;
@@ -41,7 +59,7 @@ public class logicaTablero {
 					}
 					
 					
-				//	System.out.println(y);
+				//	//system.out.println(y);
 			}
 		}
 	}
@@ -53,10 +71,10 @@ public class logicaTablero {
 		if(x>=3){
 			for(i=x-1;i>(x-4);i--){
 				if(ficha[y][i]!=null&&ficha[y][i].getJugador()== jugador){
-					System.out.println("test");
-					System.out.println(ficha[y][i].getJugador());	
+				//	//system.out.println("test");
+					////system.out.println(ficha[y][i].getJugador());	
 					cont++;
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
@@ -69,13 +87,13 @@ public class logicaTablero {
 	}
 	public static int horizontalDer(Ficha[][] ficha,int x, int y,int jugador){
 		int i,cont=1;
-		if(x<=2){
+		if(x<=3){
 			for(i=x+1;i<(x+4);i++){
 				if(ficha[y][i]!=null&&ficha[y][i].getJugador()== jugador){
-					System.out.println("test");
-					System.out.println(ficha[y][i].getJugador());	
+					//system.out.println("test");
+					//system.out.println(ficha[y][i].getJugador());	
 					cont++;
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
@@ -86,15 +104,16 @@ public class logicaTablero {
 		else
 			return 0;
 	}
-	public static int vertical(Ficha[][] ficha,int y, int x,int jugador){
+	
+	public static int vertical(Ficha[][] ficha,int x, int y,int jugador){
 		int i,cont=0;
-		if(y<=1){
+		if(y<=2){
 			for(i=y;i<(y+4);i++){
 				if(ficha[i][x]!=null&&ficha[i][x].getJugador()== jugador){
-					System.out.println("test");
-					System.out.println(ficha[i][x].getJugador());	
+					//system.out.println("test");
+					//system.out.println(ficha[i][x].getJugador());	
 					cont++;
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
@@ -105,16 +124,18 @@ public class logicaTablero {
 		else
 			return 0;
 	}
+	
 	public static int DiagonalIzqArriba(Ficha[][] ficha,int x, int y,int jugador){
-		int i,cont=1;
+		int i,cont=1,temp = y;
 		if(x>=3){
-			//System.out.println("hola");
-			for(i=y;i>(y-3);i--){
-				if(ficha[i][i]!=null&&ficha[i][i].getJugador()== jugador){
-					System.out.println("test");
-					System.out.println(ficha[i][i].getJugador());	
+			for(i=x-1;i>(x-4);i--){
+				temp--;
+				//system.out.println(" "+i + temp);
+				if(ficha[i][temp]!=null&&ficha[i][temp].getJugador()== jugador){
+					//system.out.println("test");
+					//system.out.println(ficha[i][temp].getJugador());	
 					cont++;
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
@@ -128,14 +149,14 @@ public class logicaTablero {
 	public static int DiagonalIzqAbajo(Ficha[][] ficha,int x, int y,int jugador){
 		int i,cont=1;
 		if(y<=2&&x>=3){
-			System.out.println("------");
+			//system.out.println("------");
 			for(i=y;i<=(y+2);i++){
 				if(ficha[i][x]!=null&&ficha[i][x].getJugador()== jugador){
 					x--;
-					System.out.println("test");
-					System.out.println(ficha[i][x].getJugador());	
+					//system.out.println("test");
+					//system.out.println(ficha[i][x].getJugador());	
 					cont++;
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
@@ -151,23 +172,23 @@ public class logicaTablero {
 	//Pendiente-----------------------------------------------------------
 	public static int DiagonalDerAbajo(Ficha[][] ficha,int x, int y,int jugador){
 		int i,cont=1;
-		
-		if(x<=3){
+		//system.out.println(x+","+y);
+		if(x<=3 && y<3){
 			
-			System.out.println("------");
+			//system.out.println("------");
 		
-			for(i=y+1;i<=(y+3);i++){
+			for(i=y+1;i<(y+4);i++){
 				
-				System.out.println(" "+ x + i );
+				//system.out.println(" "+ x + i );
 				x++;
-			if(ficha[x][i]!=null&&ficha[x][i].getJugador()== jugador){
+			if(ficha[i][x]!=null&&ficha[i][x].getJugador()== jugador){
 				
-					System.out.println("test");
-					System.out.println(ficha[x][i].getJugador());	
+					//system.out.println("test");
+					//system.out.println(ficha[i][x].getJugador());	
 					
 					cont++;
 					
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
@@ -184,18 +205,16 @@ public class logicaTablero {
 		int i, cont=1;
 		
 		
-		if(x<=4){
-			System.out.println("hola");
-			System.out.println(" "+x+ y);
-			for(i=y-1;y<=0;y++){
+		if(x<4 && y>2){
+			//system.out.println("hola");
+			//system.out.println(" "+x+ y);
+			for(i=y-1;i>(y-4);i--){
 				x++;
-				System.out.println(" "+x + i);
-				if(ficha[x][i]!=null&&ficha[x][i].getJugador()== jugador){
-					System.out.println("test");
-					System.out.println(ficha[x][i].getJugador());	
+				//system.out.println(" "+x + i);
+				if(ficha[i][x]!=null&&ficha[i][x].getJugador()== jugador){
+					//system.out.println("test");
 					cont++;
-					
-					System.out.println(cont);
+					//system.out.println(cont);
 				}
 			}
 			if(cont == 4)
