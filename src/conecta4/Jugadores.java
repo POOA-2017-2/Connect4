@@ -41,7 +41,7 @@ public class Jugadores implements Serializable{
 	}
 	
 	public String toString() {
-		return "Usuario: " + nombre + ", " + nickname + ", " + edad;
+		return "Usuario: " + nombre + ", " + nickname;
 	}
 
 }

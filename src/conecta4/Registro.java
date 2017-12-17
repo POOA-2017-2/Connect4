@@ -35,21 +35,13 @@ import java.awt.event.ActionEvent;
 
 public class Registro extends JFrame {
 
-	/*Clon de la clase Registro para testear*/
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtID;
 	private JTextField txtEdad;
-	//private Object[] ob;
 	
 	DefaultListModel<Jugadores> modelo = new DefaultListModel<Jugadores>();
-	//String[] lista = (String[]) modelo.toArray();
-	//String lista [] = new String[modelo.size()];
-	//public Object[] ob = new Object[modelo.size()];
-	
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,9 +55,6 @@ public class Registro extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Registro() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
@@ -80,9 +69,7 @@ public class Registro extends JFrame {
 		panelUsuarios.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		panelUsuarios.add(scrollPane);
-		
-		
+		panelUsuarios.add(scrollPane);		
 		
 		JPanel panelDatos = new JPanel();
 		contentPane.add(panelDatos, BorderLayout.CENTER);
@@ -106,7 +93,7 @@ public class Registro extends JFrame {
 		panelDatos.add(panelRegistro, BorderLayout.CENTER);
 		panelRegistro.setLayout(new GridLayout(3, 2, 0, 3));
 		
-		JLabel lblNombre = new JLabel("Nombre");
+		JLabel lblNombre = new JLabel("* Nombre");
 		lblNombre.setForeground(new Color(255, 255, 0));
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre.setBackground(new Color(255, 127, 80));
@@ -117,7 +104,7 @@ public class Registro extends JFrame {
 		panelRegistro.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		JLabel lblId = new JLabel("Nickname");
+		JLabel lblId = new JLabel("* Nickname");
 		lblId.setForeground(new Color(255, 255, 0));
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
 		lblId.setBackground(new Color(255, 127, 80));
@@ -135,6 +122,7 @@ public class Registro extends JFrame {
 		panelRegistro.add(lblEdad);
 		
 		txtEdad = new JTextField();
+		txtEdad.setEditable(false);
 		txtEdad.setBackground(new Color(255, 222, 173));
 		panelRegistro.add(txtEdad);
 		txtEdad.setColumns(10);
@@ -177,10 +165,8 @@ public class Registro extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	
+		
 		list.setModel(modelo);
-		// = modelo.toArray(lista);		
-		//
 		
 		//Acciones de los botones
 		btnAgregar.addActionListener(new ActionListener() {
@@ -192,14 +178,9 @@ public class Registro extends JFrame {
 				String nombre = txtNombre.getText();
 				String nickname = txtID.getText();
 				String edad = txtEdad.getText();
-				int index;
 				Jugadores us = new Jugadores(nombre,nickname,edad);
 				modelo.addElement(us);
-				//Object[] ob = modelo.toArray(nickname);
-				//System.out.println(ob);
-				//lista[index] = txtNombre.getText();
-				//lista = (String[]) modelo.toArray();
-				//System.out.println(lista);
+
 				try {
 					FileOutputStream file = new FileOutputStream("Jugadores.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
@@ -217,6 +198,7 @@ public class Registro extends JFrame {
 				
 			}
 		});
+
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
@@ -225,7 +207,7 @@ public class Registro extends JFrame {
 				String edad = txtEdad.getText();
 				Jugadores us = new Jugadores(nombre,nickname,edad);
 				modelo.setElementAt(us, index);
-				//modelo.copyInto(ob);
+
 				try {
 					FileOutputStream file = new FileOutputStream("Jugadores.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
@@ -241,6 +223,7 @@ public class Registro extends JFrame {
 				}
 			}
 		});
+		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
@@ -249,7 +232,7 @@ public class Registro extends JFrame {
 				txtEdad.setText(null);
 				txtID.setText(null);
 				txtNombre.setText(null);
-				String opcion = (String) JOptionPane.showInputDialog(contentPane, "Jugador #1", "Escoger jugador", JOptionPane.INFORMATION_MESSAGE, null, modelo.toArray(), null);
+				
 				try {
 					FileOutputStream file = new FileOutputStream("Jugadores.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(file);
@@ -264,11 +247,5 @@ public class Registro extends JFrame {
 				}
 			}
 		});
-	//modelo.copyInto(lista);
-		//modelo.copyInto(ob);
-	
 	}
-
-	
 }
-/*Implementar el metodo CopyInto(Object[] anArray para desplegarlo al inicio del juego)*/

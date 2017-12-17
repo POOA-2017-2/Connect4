@@ -24,11 +24,11 @@ public class Presentacion extends JPanel {
 
  
 		public Presentacion(){
-			this.setSize(300, 200); //se selecciona el tamaño del panel
+			this.setSize(300, 200); //se selecciona el tamaï¿½o del panel
 }
  
-//Se crea un método cuyo parámetro debe ser un objeto Graphics
- 
+//Se crea un mï¿½todo cuyo parï¿½metro debe ser un objeto Graphics
+ /*
 		public void paint(Graphics grafico) {
 			Dimension height = getSize();
  
@@ -41,6 +41,14 @@ public class Presentacion extends JPanel {
 
 			setOpaque(false);
 			super.paintComponent(grafico);
+		}
+*/
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			Image imagen = new ImageIcon(Presentacion.class.getResource("/img/conecta4.png")).getImage();
+			int x = getWidth()/2 - imagen.getWidth(this)/2;
+			int y = getWidth()/2 - imagen.getHeight(this)/2;
+			g.drawImage(imagen, x, y, this);
 		}
 }
 		
